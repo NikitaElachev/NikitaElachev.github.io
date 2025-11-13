@@ -5,15 +5,26 @@
     padding: 0;
 }
 
-/* Подключение и применение шрифта */
+/* Доработка для прижатия футера к низу */
+html {
+    height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
     font-family: 'Montserrat', sans-serif;
     color: #333;
     line-height: 1.6;
 }
 
+main {
+    flex-grow: 1; /* Основной контент будет занимать все доступное пространство */
+}
+
 .container {
-    max-width: 800px;
+    max-width: 960px; /* Немного увеличим для новой страницы */
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -29,8 +40,11 @@ body {
     margin-bottom: 20px;
 }
 
+/* Доработка меню (Flexbox) */
 .header nav {
-    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Заменили margin на gap для удобства */
 }
 
 .header nav a {
@@ -38,13 +52,19 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     color: #333;
-    margin-right: 25px;
     transition: color 0.3s ease;
 }
 
 .header nav a:hover {
-    color: #ff6347; /* томатный цвет при наведении */
+    color: tomato;
 }
+
+/* Стиль для активной ссылки меню */
+.header nav a#active {
+    color: tomato;
+    font-weight: 700;
+}
+
 
 /* Стили для основного контента */
 .main .container > section {
@@ -62,6 +82,10 @@ body {
     width: 100%;
     height: auto;
     margin-bottom: 20px;
+    max-width: 800px; /* Ограничим максимальную ширину */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .about-us p {
@@ -89,6 +113,7 @@ body {
 .popular-dishes th, .popular-dishes td {
     padding: 15px;
     border: 1px solid #ddd;
+    font-size: 16px; /* Базовый размер шрифта для таблицы */
 }
 
 .popular-dishes th {
@@ -120,5 +145,58 @@ body {
 }
 
 .footer a:hover {
-    color: #ff6347; /* томатный цвет при наведении */
+    color: tomato;
+}
+
+/* --- АДАПТИВНОСТЬ --- */
+
+/* Планшеты и небольшие десктопы */
+@media (max-width: 800px) {
+    .header h1 {
+        text-align: center;
+    }
+    
+    .header nav {
+        justify-content: space-between;
+    }
+
+    /* Главная страница */
+    .about-us img {
+        width: 500px;
+    }
+}
+
+/* Мобильные устройства */
+@media (max-width: 600px) {
+    .header nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header nav a {
+        font-size: 22px; /* Увеличиваем на 4px */
+    }
+
+    .main h2 {
+        text-align: center;
+    }
+
+    /* Главная страница */
+    .about-us img {
+        width: 100%;
+    }
+
+    .popular-dishes th, .popular-dishes td {
+        font-size: 14px; /* Уменьшаем на 2px */
+    }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 400px) {
+    /* Главная страница */
+    .popular-dishes th, .popular-dishes td {
+        font-size: 12px; /* Уменьшаем еще на 2px */
+        padding: 8px;
+    }
 }

@@ -1,0 +1,92 @@
+/* --- СТИЛИ СТРАНИЦЫ "СОБРАТЬ ЛАНЧ" --- */
+
+/* Сетка для блюд */
+.dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Увеличим отступ для красоты */
+}
+
+/* Карточка блюда */
+.dish-card {
+    background-color: white;
+    border-radius: 35px;
+    padding: 30px 40px;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    cursor: pointer;
+    transition: border 0.3s ease, transform 0.3s ease;
+    border: 2px solid transparent; /* Для плавного появления рамки */
+    
+    /* Flex для выравнивания кнопки */
+    display: flex;
+    flex-direction: column;
+}
+
+.dish-card:hover {
+    border-color: tomato;
+    transform: translateY(-5px); /* Небольшой эффект приподнимания */
+}
+
+.dish-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 35px;
+    margin-bottom: 15px;
+}
+
+/* Блок с информацией о блюде, который будет растягиваться */
+.dish-info {
+    flex-grow: 1;
+}
+
+.dish-price {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.dish-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.dish-weight {
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.add-button {
+    background-color: #f1eee9;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-top: auto; /* Прижимает кнопку к низу карточки */
+    transition: background-color 0.3s ease;
+}
+
+.dish-card:hover .add-button {
+    background-color: tomato;
+    color: white;
+}
+
+/* --- АДАПТИВНОСТЬ СТРАНИЦЫ "СОБРАТЬ ЛАНЧ" --- */
+
+@media (max-width: 800px) {
+    .dishes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dishes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dish-card {
+        padding: 20px;
+    }
+}
