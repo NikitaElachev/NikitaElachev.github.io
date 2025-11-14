@@ -1,35 +1,33 @@
-/* Универсальный селектор */
+/* общий стиль */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Доработка для прижатия футера к низу */
-html {
-    height: 100%;
-}
-
+/* стили для всего тела документа */
 body {
     display: flex;
-    flex-direction: column;
-    min-height: 100%;
+    flex-direction: column; /* основные блоки (header, main, footer) выстраиваются в колонку */
+    min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
-    color: #333;
+    color: #333; 
     line-height: 1.6;
 }
 
+/* стили для основного контента */
 main {
-    flex-grow: 1; /* Основной контент будет занимать все доступное пространство */
+    flex-grow: 1; /* main занимает всё доступное пространство, чтобы прижать футер */
 }
 
+/* класс для центрирования сайта*/
 .container {
-    max-width: 960px; /* Немного увеличим для новой страницы */
+    max-width: 960px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Стили для шапки сайта */
+/* стили для шапки сайта */
 .header {
     padding: 20px 0;
 }
@@ -40,11 +38,10 @@ main {
     margin-bottom: 20px;
 }
 
-/* Доработка меню (Flexbox) */
 .header nav {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* Заменили margin на gap для удобства */
+    flex-wrap: wrap; /* разрешить перенос элементов на новую строку, если они не помещаются */
+    gap: 15px;
 }
 
 .header nav a {
@@ -52,22 +49,22 @@ main {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     color: #333;
-    transition: color 0.3s ease;
+    transition: color 0.3s; /* когда меняется свойство color, сделать переход, длительность 0.3с */
 }
 
 .header nav a:hover {
     color: tomato;
 }
 
-/* Стиль для активной ссылки меню */
+/* стиль для активной вкладки меню */
 .header nav a#active {
     color: tomato;
     font-weight: 700;
 }
 
 
-/* Стили для основного контента */
-.main .container > section {
+/* стили для основных блоков сайта */
+.main .container section {
     margin-bottom: 40px;
 }
 
@@ -77,25 +74,21 @@ main {
     font-weight: 700;
 }
 
-/* Блок "О нас" */
+/* блок "О нас" */
 .about-us img {
     width: 100%;
     height: auto;
     margin-bottom: 20px;
-    max-width: 800px; /* Ограничим максимальную ширину */
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 800px;
 }
 
 .about-us p {
     font-size: 16px;
 }
 
-/* Блок "Преимущества" */
+/* блок "Преимущества" */
 .advantages ul {
-    list-style-position: inside;
-    padding-left: 0;
+    list-style-position: inside; /* маркеры списка будут внутри блока, чтобы выглядело красивее */
     font-size: 16px;
 }
 
@@ -103,100 +96,89 @@ main {
     margin-bottom: 10px;
 }
 
-/* Стили для таблицы */
+/* стили для таблицы */
 .popular-dishes table {
     width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+    border-collapse: collapse; /* убрать двойные рамки между ячейками */
+    text-align: left; /* Выравнивание текста в ячейках по левому краю */
 }
 
 .popular-dishes th, .popular-dishes td {
     padding: 15px;
     border: 1px solid #ddd;
-    font-size: 16px; /* Базовый размер шрифта для таблицы */
+    font-size: 16px;
 }
 
-.popular-dishes th {
-    font-weight: 700;
-}
-
-.popular-dishes tbody td:first-child {
-    text-align: center;
-}
-
-/* Стили для футера */
+/* стили для футера */
 .footer {
     background-color: black;
     color: white;
     padding: 30px 0;
     margin-top: 40px;
-}
-
-.footer p {
     font-size: 16px;
 }
+
 
 .footer a {
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     color: white;
-    transition: color 0.3s ease;
+    transition: color 0.3s;
 }
 
 .footer a:hover {
     color: tomato;
 }
 
-/* --- АДАПТИВНОСТЬ --- */
+/* Адаптивность */
 
-/* Планшеты и небольшие десктопы */
+/* ширина экрана до 800px */
 @media (max-width: 800px) {
     .header h1 {
         text-align: center;
     }
     
     .header nav {
-        justify-content: space-between;
+        justify-content: space-between; /* распределяем ссылки по краям */
     }
 
-    /* Главная страница */
+    /* главная страница */
     .about-us img {
         width: 500px;
     }
 }
 
-/* Мобильные устройства */
+/* ширина экрана до 600px */
 @media (max-width: 600px) {
     .header nav {
-        flex-direction: column;
+        flex-direction: column; /* навигация становится вертикальной */
         align-items: center;
         gap: 10px;
     }
 
     .header nav a {
-        font-size: 22px; /* Увеличиваем на 4px */
+        font-size: 22px; /* увеличиваем шрифт */
     }
 
     .main h2 {
         text-align: center;
     }
 
-    /* Главная страница */
+    /* главная страница */
     .about-us img {
-        width: 100%;
+        width: 100%; /* картинка занимает всю ширину контейнера */
     }
 
     .popular-dishes th, .popular-dishes td {
-        font-size: 14px; /* Уменьшаем на 2px */
+        font-size: 14px; /* уменьшаем шрифт в таблице */
     }
 }
 
-/* Очень маленькие экраны */
+/* ширина экрана до 400px */
 @media (max-width: 400px) {
-    /* Главная страница */
     .popular-dishes th, .popular-dishes td {
-        font-size: 12px; /* Уменьшаем еще на 2px */
+        font-size: 12px; /* уменьшаем шрифт в таблице */
         padding: 8px;
     }
 }

@@ -1,30 +1,26 @@
-/* --- СТИЛИ СТРАНИЦЫ "СОБРАТЬ ЛАНЧ" --- */
+/* стили для страницы "Собрать ланч" */
 
-/* Сетка для блюд */
+/* сетка для блюд */
 .dishes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px; /* Увеличим отступ для красоты */
+    display: grid; /* используем Grid для создания сетки */
+    grid-template-columns: repeat(3, 1fr); /* создаем 3 колонки одинаковой ширины */
+    gap: 20px; /* задаем отступ между элементами сетки */
 }
 
-/* Карточка блюда */
+/* карточка блюда */
 .dish-card {
     background-color: white;
     border-radius: 35px;
     padding: 30px 40px;
-    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13)); /* создание тени */
     cursor: pointer;
-    transition: border 0.3s ease, transform 0.3s ease;
-    border: 2px solid transparent; /* Для плавного появления рамки */
-    
-    /* Flex для выравнивания кнопки */
-    display: flex;
-    flex-direction: column;
+    border: 2px solid transparent;
+    display: flex; /* используем flex для выравнивания содержимого внутри карточки */
+    flex-direction: column; /* элементы внутри карточки будут располагаться друг под другом */
 }
 
 .dish-card:hover {
     border-color: tomato;
-    transform: translateY(-5px); /* Небольшой эффект приподнимания */
 }
 
 .dish-card img {
@@ -34,9 +30,9 @@
     margin-bottom: 15px;
 }
 
-/* Блок с информацией о блюде, который будет растягиваться */
+/* блок с информацией о блюде */
 .dish-info {
-    flex-grow: 1;
+    flex-grow: 1; /* этот блок займет все доступное свободное пространство */
 }
 
 .dish-price {
@@ -64,25 +60,30 @@
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    margin-top: auto; /* Прижимает кнопку к низу карточки */
-    transition: background-color 0.3s ease;
+    margin-top: auto;
 }
 
+/* стили для кнопки при наведении на карточку */
 .dish-card:hover .add-button {
     background-color: tomato;
     color: white;
+    transition: background-color 0.3s;
 }
 
-/* --- АДАПТИВНОСТЬ СТРАНИЦЫ "СОБРАТЬ ЛАНЧ" --- */
+/* Адаптивность */
 
+/* ширина экрана до 800px */
 @media (max-width: 800px) {
     .dishes-grid {
+        /* Перестраиваем сетку в 2 колонки */
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* ширина экрана до 600px */
 @media (max-width: 600px) {
     .dishes-grid {
+        /* Перестраиваем сетку в 1 колонку */
         grid-template-columns: 1fr;
     }
     
