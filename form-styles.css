@@ -69,7 +69,7 @@
 .form-block select:focus,
 .form-block textarea:focus {
     outline: none;
-    border-color: tomato;
+    border: 1px solid tomato;
     box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
 }
 
