@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lunch-styles.css">
-    <link rel="stylesheet" href="form-styles.css"> <!-- Ссылка на новые стили для формы -->
+    <link rel="stylesheet" href="form-styles.css"> 
 </head>
 <body>
     <header class="header">
@@ -26,116 +26,20 @@
 
     <main class="main">
         <div class="container">
-            <!-- Секция 1 -->
+            <!-- Секции для блюд будут заполнены с помощью JavaScript -->
             <section class="menu-section">
                 <h2>Супы</h2>
-                <!-- Сетка -->
-                <div class="dishes-grid">
-                    <!-- Карточка блюда 1 -->
-                    <div class="dish-card">
-                        <img src="images/Борщ.png" alt="Борщ">
-                        <div class="dish-info">
-                            <p class="dish-price">250Р</p>
-                            <p class="dish-name">Борщ</p>
-                            <p class="dish-weight">300г</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                    <!-- Карточка блюда 2 -->
-                    <div class="dish-card">
-                        <img src="images/Том ям.png" alt="Том Ям">
-                        <div class="dish-info">
-                            <p class="dish-price">365Р</p>
-                            <p class="dish-name">Том Ям с креветками</p>
-                            <p class="dish-weight">350г</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                    <!-- Карточка блюда 3 -->
-                    <div class="dish-card">
-                        <img src="images/Норвежский суп.png" alt="Норвежский суп">
-                        <div class="dish-info">
-                            <p class="dish-price">270Р</p>
-                            <p class="dish-name">Норвежский суп</p>
-                            <p class="dish-weight">300г</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                </div>
+                <div class="dishes-grid" id="soups-grid"></div>
             </section>
             
-            <!-- Секция 2 -->
             <section class="menu-section">
                 <h2>Главные блюда</h2>
-                <div class="dishes-grid">
-                    <!-- Карточка блюда 1 -->
-                    <div class="dish-card">
-                        <img src="images/Лазанья.png" alt="Лазанья">
-                        <div class="dish-info">
-                             <p class="dish-price">385Р</p>
-                            <p class="dish-name">Лазанья с мясным соусом болоньезе</p>
-                            <p class="dish-weight">250г</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                    <!-- Карточка блюда 2 -->
-                    <div class="dish-card">
-                        <img src="images/Картошка.jpeg" alt="Котлеты">
-                        <div class="dish-info">
-                            <p class="dish-price">225Р</p>
-                            <p class="dish-name">Котлеты из курицы с пюре</p>
-                            <p class="dish-weight">300г</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                    <!-- Карточка блюда 3 -->
-                    <div class="dish-card">
-                        <img src="images/Картошка.jpeg" alt="Картошка">
-                        <div class="dish-info">
-                            <p class="dish-price">150Р</p>
-                            <p class="dish-name">Жареная картошка с грибами</p>
-                            <p class="dish-weight">280г</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                </div>
+                <div class="dishes-grid" id="main-dishes-grid"></div>
             </section>
 
-            <!-- Секция 3 -->
             <section class="menu-section">
                 <h2>Напитки</h2>
-                <div class="dishes-grid">
-                    <!-- Карточка блюда 1 -->
-                     <div class="dish-card">
-                        <img src="images/Морс.jpeg" alt="Морс">
-                        <div class="dish-info">
-                            <p class="dish-price">120Р</p>
-                            <p class="dish-name">Морс клюквенный</p>
-                            <p class="dish-weight">500мл</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                    <!-- Карточка блюда 2 -->
-                     <div class="dish-card">
-                        <img src="images/Чай.jpeg" alt="Чай с травами">
-                        <div class="dish-info">
-                            <p class="dish-price">180Р</p>
-                            <p class="dish-name">Чай с травами</p>
-                            <p class="dish-weight">1000мл</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                    <!-- Карточка блюда 3 -->
-                     <div class="dish-card">
-                        <img src="images/Милкшейк.png" alt="Милкшейк">
-                        <div class="dish-info">
-                            <p class="dish-price">200Р</p>
-                            <p class="dish-name">Милкшейк</p>
-                            <p class="dish-weight">400мл</p>
-                        </div>
-                        <button class="add-button">Добавить</button>
-                    </div>
-                </div>
+                <div class="dishes-grid" id="drinks-grid"></div>
             </section>
         </div>
     </main>
@@ -145,43 +49,43 @@
         <div class="container">
             <h2>Оформление заказа</h2>
             <form action="https://httpbin.org/post" method="POST" class="order-form">
-                <!-- Блок с заказом клиента -->
+                <!-- Блок с заказом клиента (ВОССТАНОВЛЕН) -->
                 <div class="form-block client-order">
                     <h3>Ваш заказ</h3>
                     <div class="form-group">
                         <label for="soup-select">Суп</label>
+                        <!-- Опции будут добавлены через JS -->
                         <select name="soup" id="soup-select" required>
                             <option value="">Выберите суп</option>
-                            <option value="borsch">Борщ</option>
-                            <option value="tom-yam">Том Ям с креветками</option>
-                            <option value="norwegian-soup">Норвежский суп</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="main-dish-select">Главное блюдо</label>
+                        <!-- Опции будут добавлены через JS -->
                         <select name="main-dish" id="main-dish-select" required>
                             <option value="">Выберите главное блюдо</option>
-                            <option value="lasagna">Лазанья с мясным соусом болоньезе</option>
-                            <option value="cutlets-puree">Котлеты из курицы с пюре</option>
-                            <option value="fried-potatoes-mushrooms">Жареная картошка с грибами</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="drink-select">Напиток</label>
+                        <!-- Опции будут добавлены через JS -->
                         <select name="drink" id="drink-select" required>
                             <option value="">Выберите напиток</option>
-                            <option value="mors">Морс клюквенный</option>
-                            <option value="herbal-tea">Чай с травами</option>
-                            <option value="milkshake">Милкшейк</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="comment">Комментарий к заказу</label>
                         <textarea name="comment" id="comment" rows="6"></textarea>
                     </div>
+
+                    <!-- БЛОК ДЛЯ ИТОГОВОЙ СТОИМОСТИ -->
+                    <div class="total-cost" id="total-cost-container">
+                        <h3>Стоимость заказа</h3>
+                        <p id="total-cost-value">0Р</p>
+                    </div>
                 </div>
 
-                <!-- Блок с данными клиента -->
+                <!-- Блок с данными клиента (остается без изменений) -->
                 <div class="form-block client-data">
                     <h3>Данные для доставки</h3>
                     <div class="form-group">
@@ -233,6 +137,10 @@
             <p>Позвонить нам <a href="tel:+79124613559">+7-912-461-35-59</a></p>
         </div>
     </footer>
+
+    <!-- ПОДКЛЮЧЕНИЕ СКРИПТОВ -->
+    <script src="data.js"></script>
+    <script src="scripts.js"></script>
 
 </body>
 </html>

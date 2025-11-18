@@ -1,7 +1,7 @@
-/* Стили для секции с формой заказа */
+/* --- Стили для секции с формой заказа --- */
 .order-form-section {
     padding: 40px 0;
-    background-color: white;
+    background-color: #f9f9f9;
 }
 
 .order-form-section h2 {
@@ -10,7 +10,7 @@
     margin-bottom: 30px;
 }
 
-/* Контейнер формы */
+/* --- Контейнер формы --- */
 .order-form {
     display: flex;
     gap: 40px;
@@ -20,7 +20,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Блоки внутри формы (колонки) */
+/* --- Блоки внутри формы (колонки) --- */
 .form-block {
     flex: 1; /* Каждая колонка занимает равное пространство */
     display: flex;
@@ -36,7 +36,7 @@
     padding-bottom: 10px;
 }
 
-/* Группа элементов (label + input) */
+/* --- Группа элементов (label + input) --- */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@
     color: #555;
 }
 
-/* Стилизация полей ввода и селектов */
+/* --- Стилизация полей ввода и селектов --- */
 .form-block input[type="text"],
 .form-block input[type="email"],
 .form-block input[type="tel"],
@@ -62,22 +62,23 @@
     border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-block input:focus,
 .form-block select:focus,
 .form-block textarea:focus {
     outline: none;
-    border: 1px solid tomato;
+    border-color: tomato;
     box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
 }
 
 .form-block textarea {
     resize: vertical; /* Разрешить изменять высоту */
+    min-height: 120px;
 }
 
-/* Группа для чекбокса */
+/* --- Группа для чекбокса --- */
 .checkbox-group {
     flex-direction: row;
     align-items: center;
@@ -94,7 +95,7 @@
     font-weight: 400;
 }
 
-/* Группа для радиокнопок */
+/* --- Группа для радиокнопок --- */
 .radio-group {
     display: flex;
     flex-direction: column;
@@ -112,15 +113,14 @@
     font-weight: 400;
 }
 
-
-/* Контейнер для кнопок */
+/* --- Контейнер для кнопок --- */
 .form-buttons {
     display: flex;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: auto; /* Прижимает кнопки к низу */
 }
 
-/* Общие стили для кнопок */
+/* --- Общие стили для кнопок --- */
 .btn {
     flex-grow: 1;
     padding: 15px;
@@ -131,6 +131,10 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
 }
 
 /* Кнопка "Сбросить" */
@@ -153,11 +157,40 @@
     background-color: #e05a4f;
 }
 
+/* --- Стили для блока "Стоимость заказа" --- */
+.total-cost {
+    display: none; /* Изначально скрыт */
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Прижимает блок к низу колонки */
+    padding-top: 20px;
+    border-top: 2px solid #ddd;
+}
 
-/* Адаптивность для формы */
+.total-cost h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.total-cost p {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* --- Адаптивность для формы --- */
 @media (max-width: 800px) {
     .order-form {
         flex-direction: column;
         padding: 20px;
+    }
+
+    .form-buttons {
+        margin-top: 20px;
+    }
+
+    .total-cost {
+        margin-top: 20px; /* Добавляем отступ сверху на мобильных */
     }
 }
