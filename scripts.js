@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- ОБЪЯВЛЕНИЕ ПЕРЕМЕННЫХ ---
+    // Объявление переменных
 
     // Контейнеры для карточек блюд
     const soupsGrid = document.querySelector('#soups-grid');
@@ -23,11 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         drink: null
     };
 
-    // --- ФУНКЦИИ ---
+    // Функции
 
-    /**
-     * Сортирует, отображает карточки блюд и заполняет опции в селектах.
-     */
     function renderContent() {
         // 1. Сортировка по имени (алфавиту)
         dishes.sort((a, b) => a.name.localeCompare(b.name));
@@ -36,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         soupsGrid.innerHTML = '';
         mainDishesGrid.innerHTML = '';
         drinksGrid.innerHTML = '';
-        // Очищаем селекты (кроме первого элемента "Выберите...")
         soupSelect.length = 1;
         mainDishSelect.length = 1;
         drinkSelect.length = 1;
@@ -76,19 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    /**
-     * Обновляет значения в селектах формы на основе выбранных блюд.
-     */
+    
+     //Обновляет значения в селектах формы на основе выбранных блюд.
+    
     function updateOrderForm() {
         soupSelect.value = selectedDishes.soup ? selectedDishes.soup.keyword : "";
         mainDishSelect.value = selectedDishes.main ? selectedDishes.main.keyword : "";
         drinkSelect.value = selectedDishes.drink ? selectedDishes.drink.keyword : "";
     }
     
-    /**
-     * Рассчитывает и отображает итоговую стоимость заказа.
-     */
+    //Рассчитывает и отображает итоговую стоимость заказа
+
     function calculateAndDisplayTotal() {
         let totalCost = 0;
         
@@ -106,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- ОБРАБОТЧИКИ СОБЫТИЙ ---
+    // Заполнение форм
 
     // Обработчик клика по карточке блюда
     mainContent.addEventListener('click', (event) => {
@@ -139,8 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
             calculateAndDisplayTotal();
         });
     });
-
-
-    // --- ПЕРВИЧНЫЙ ЗАПУСК ---
     renderContent();
 });

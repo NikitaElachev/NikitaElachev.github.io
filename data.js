@@ -39,7 +39,7 @@ const dishes = [
         price: 225,
         category: 'main',
         count: '300г',
-        image: 'images/Картошка.jpeg' // Предполагаем, что изображение подходит
+        image: 'images/Картошка.jpeg'
     },
     {
         keyword: 'fried-potatoes-mushrooms',
@@ -47,7 +47,7 @@ const dishes = [
         price: 150,
         category: 'main',
         count: '280г',
-        image: 'images/Картошка.jpeg' // Предполагаем, что изображение подходит
+        image: 'images/Картошка.jpeg'
     },
     // Напитки
     {
