@@ -1,4 +1,4 @@
-/* --- Стили для секции с формой заказа --- */
+/* Стили для секции с формой заказа */
 .order-form-section {
     padding: 40px 0;
     background-color: #f9f9f9;
@@ -10,7 +10,7 @@
     margin-bottom: 30px;
 }
 
-/* --- Контейнер формы --- */
+/* Контейнер формы */
 .order-form {
     display: flex;
     gap: 40px;
@@ -20,9 +20,9 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Блоки внутри формы (колонки) --- */
+/* Блоки внутри формы */
 .form-block {
-    flex: 1; /* Каждая колонка занимает равное пространство */
+    flex: 1; /* Каждая колонка занимает одинаковое количетсов места */
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -36,7 +36,7 @@
     padding-bottom: 10px;
 }
 
-/* --- Группа элементов (label + input) --- */
+/* label + input */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@
     color: #555;
 }
 
-/* --- Стилизация полей ввода и селектов --- */
+/* Стилизация полей ввода и селектов */
 .form-block input[type="text"],
 .form-block input[type="email"],
 .form-block input[type="tel"],
@@ -78,7 +78,7 @@
     min-height: 120px;
 }
 
-/* --- Группа для чекбокса --- */
+/* Группа для чекбокса */
 .checkbox-group {
     flex-direction: row;
     align-items: center;
@@ -95,7 +95,7 @@
     font-weight: 400;
 }
 
-/* --- Группа для радиокнопок --- */
+/* Группа для радиокнопок */
 .radio-group {
     display: flex;
     flex-direction: column;
@@ -113,14 +113,14 @@
     font-weight: 400;
 }
 
-/* --- Контейнер для кнопок --- */
+/* Контейнер для кнопок */
 .form-buttons {
     display: flex;
     gap: 15px;
-    margin-top: auto; /* Прижимает кнопки к низу */
+    margin-top: auto;
 }
 
-/* --- Общие стили для кнопок --- */
+/* Общие стили для кнопок */
 .btn {
     flex-grow: 1;
     padding: 15px;
@@ -133,11 +133,7 @@
     transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
-.btn:hover {
-    transform: translateY(-2px);
-}
-
-/* Кнопка "Сбросить" */
+/* Кнопка сбрасывания */
 .btn-reset {
     background-color: #f1eee9;
     color: #333;
@@ -147,7 +143,7 @@
     background-color: #e0ddd7;
 }
 
-/* Кнопка "Заказать" */
+/* Кнопка Заказать */
 .btn-submit {
     background-color: tomato;
     color: white;
@@ -157,12 +153,12 @@
     background-color: #e05a4f;
 }
 
-/* --- Стили для блока "Стоимость заказа" --- */
+/* Стили для блока стоимости */
 .total-cost {
     display: none; /* Изначально скрыт */
     justify-content: space-between;
     align-items: center;
-    margin-top: auto; /* Прижимает блок к низу колонки */
+    margin-top: auto;
     padding-top: 20px;
     border-top: 2px solid #ddd;
 }
@@ -179,7 +175,7 @@
     color: #333;
 }
 
-/* --- Адаптивность для формы --- */
+/* Адаптивность для формы */
 @media (max-width: 800px) {
     .order-form {
         flex-direction: column;
@@ -191,6 +187,6 @@
     }
 
     .total-cost {
-        margin-top: 20px; /* Добавляем отступ сверху на мобильных */
+        margin-top: 20px;
     }
 }
