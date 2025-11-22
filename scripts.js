@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Объявление переменных
 
     // Контейнеры для карточек блюд
     const soupsGrid = document.querySelector('#soups-grid');
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalCostContainer = document.getElementById('total-cost-container');
     const totalCostValueEl = document.getElementById('total-cost-value');
 
-    // Состояние: хранит ВЫБРАННЫЕ объекты блюд
+    // Состояние: хранит выбранные объекты блюд
     let selectedDishes = {
         soup: null,
         main: null,
@@ -55,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Создание опции для селекта
             const option = new Option(dish.name, dish.keyword);
 
-            // 4. Добавление элементов в DOM
+            // 4. Добавление элементов
             switch (dish.category) {
                 case 'soup':
                     soupsGrid.innerHTML += dishCardHTML;

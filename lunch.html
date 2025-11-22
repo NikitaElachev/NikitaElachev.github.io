@@ -26,7 +26,6 @@
 
     <main class="main">
         <div class="container">
-            <!-- Секции для блюд будут заполнены с помощью JavaScript -->
             <section class="menu-section">
                 <h2>Супы</h2>
                 <div class="dishes-grid" id="soups-grid"></div>
@@ -49,26 +48,22 @@
         <div class="container">
             <h2>Оформление заказа</h2>
             <form action="https://httpbin.org/post" method="POST" class="order-form">
-                <!-- Блок с заказом клиента (ВОССТАНОВЛЕН) -->
                 <div class="form-block client-order">
                     <h3>Ваш заказ</h3>
                     <div class="form-group">
                         <label for="soup-select">Суп</label>
-                        <!-- Опции будут добавлены через JS -->
                         <select name="soup" id="soup-select" required>
                             <option value="">Выберите суп</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="main-dish-select">Главное блюдо</label>
-                        <!-- Опции будут добавлены через JS -->
                         <select name="main-dish" id="main-dish-select" required>
                             <option value="">Выберите главное блюдо</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="drink-select">Напиток</label>
-                        <!-- Опции будут добавлены через JS -->
                         <select name="drink" id="drink-select" required>
                             <option value="">Выберите напиток</option>
                         </select>
@@ -78,14 +73,14 @@
                         <textarea name="comment" id="comment" rows="6"></textarea>
                     </div>
 
-                    <!-- БЛОК ДЛЯ ИТОГОВОЙ СТОИМОСТИ -->
+                    <!-- Блок для подсчета итоговой стоимости -->
                     <div class="total-cost" id="total-cost-container">
                         <h3>Стоимость заказа</h3>
                         <p id="total-cost-value">0Р</p>
                     </div>
                 </div>
 
-                <!-- Блок с данными клиента (остается без изменений) -->
+                <!-- Блок с данными клиента -->
                 <div class="form-block client-data">
                     <h3>Данные для доставки</h3>
                     <div class="form-group">
@@ -138,7 +133,7 @@
         </div>
     </footer>
 
-    <!-- ПОДКЛЮЧЕНИЕ СКРИПТОВ -->
+    <!-- Подключение скриптов -->
     <script src="data.js"></script>
     <script src="scripts.js"></script>
 
