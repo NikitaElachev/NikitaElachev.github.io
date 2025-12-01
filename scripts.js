@@ -1,163 +1,160 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Сортировка блюд по алфавиту один раз при загрузке
-    dishes.sort((a, b) => a.name.localeCompare(b.name));
+const API_KEY = 'a5aa6a2a-26f1-4d40-a947-644e11764ba7';
+const API_URL = 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
 
-    // Объект конфигурации для связки категории блюда, ID контейнера и ID селекта
-    const categoriesConfig = {
-        soup: {
-            gridId: 'soups-grid',
-            selectId: 'soup-select'
-        },
-        main: {
-            gridId: 'main-dishes-grid',
-            selectId: 'main-dish-select'
-        },
-        salad: {
-            gridId: 'salads-grid',
-            selectId: 'salad-select'
-        },
-        drink: {
-            gridId: 'drinks-grid',
-            selectId: 'drink-select'
-        },
-        dessert: {
-            gridId: 'desserts-grid',
-            selectId: 'dessert-select'
-        }
-    };
+let dishes = []; // Глобальный массив блюд
 
-    // Состояние: хранит выбранные объекты блюд
-    let selectedDishes = {
-        soup: null,
-        main: null,
-        salad: null,
-        drink: null,
-        dessert: null
-    };
+const categoriesConfig = {
+    soup: { gridId: 'soups-grid', apiCategory: 'soup' },
+    main: { gridId: 'main-dishes-grid', apiCategory: 'main-course' },
+    salad: { gridId: 'salads-grid', apiCategory: 'salad' },
+    drink: { gridId: 'drinks-grid', apiCategory: 'drink' },
+    dessert: { gridId: 'desserts-grid', apiCategory: 'dessert' }
+};
 
-    // Функции
+// Храним ID выбранных блюд (аналог того, что было раньше, но теперь храним ID)
+let selectedDishes = {
+    soup: null,
+    main: null,
+    salad: null,
+    drink: null,
+    dessert: null
+};
 
-    // Функция создания HTML карточки
-    function createDishCard(dish) {
-        const card = document.createElement('div');
-        card.className = 'dish-card';
-        card.setAttribute('data-dish', dish.keyword);
+// --- Вспомогательные функции для LocalStorage ---
+function loadFromLocalStorage() {
+    const saved = localStorage.getItem('selectedDishes');
+    if (saved) {
+        selectedDishes = JSON.parse(saved);
+    }
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem('selectedDishes', JSON.stringify(selectedDishes));
+}
+
+// --- Основные функции (Названия сохранены) ---
+
+function createDishCard(dish) {
+    const card = document.createElement('div');
+    card.className = 'dish-card';
+    card.setAttribute('data-dish-id', dish.id); // Добавляем ID в атрибут
+    
+    card.innerHTML = `
+        <img src="${dish.image}" alt="${dish.name}">
+        <div class="dish-info">
+            <p class="dish-price">${dish.price}Р</p>
+            <p class="dish-name">${dish.name}</p>
+            <p class="dish-weight">${dish.count}</p>
+        </div>
+        <button class="add-button">Добавить</button>
+    `;
+    return card;
+}
+
+function renderCategory(category, filterKind = null) {
+    const config = categoriesConfig[category];
+    const gridElement = document.getElementById(config.gridId);
+    
+    gridElement.innerHTML = '';
+
+    let dishesToRender = dishes.filter(d => d.category === config.apiCategory);
+    
+    if (filterKind) {
+        dishesToRender = dishesToRender.filter(d => d.kind === filterKind);
+    }
+
+    dishesToRender.forEach(dish => {
+        const card = createDishCard(dish);
         
-        card.innerHTML = `
-            <img src="${dish.image}" alt="${dish.name}">
-            <div class="dish-info">
-                <p class="dish-price">${dish.price}Р</p>
-                <p class="dish-name">${dish.name}</p>
-                <p class="dish-weight">${dish.count}</p>
-            </div>
-            <button class="add-button">Добавить</button>
-        `;
-        return card;
-    }
-
-    // Функция отрисовки блюд в конкретной категории
-    function renderCategory(category, filterKind = null) {
-        const config = categoriesConfig[category];
-        const gridElement = document.getElementById(config.gridId);
+        // Проверяем, выбрано ли блюдо, и добавляем класс active-card
+        if (selectedDishes[category] === dish.id) {
+            card.classList.add('active-card');
+        }
         
-        gridElement.innerHTML = '';
+        gridElement.appendChild(card);
+    });
+}
 
-        let dishesToRender = dishes.filter(d => d.category === category);
-        
-        if (filterKind) {
-            dishesToRender = dishesToRender.filter(d => d.kind === filterKind);
-        }
+// Эта функция теперь обновляет нижнюю панель (Order Bar), 
+// так как формы на странице ланча больше нет.
+function calculateAndDisplayTotal() {
+    const bar = document.getElementById('order-bar');
+    const totalEl = document.getElementById('order-total-price');
+    const linkBtn = document.getElementById('order-link');
+    
+    let totalCost = 0;
+    let count = 0;
+    const currentDishes = {}; // Для проверки комбо
 
-        dishesToRender.forEach(dish => {
-            const card = createDishCard(dish);
-            gridElement.appendChild(card);
-        });
-    }
-
-    // Инициализация селектов в форме
-    function initFormSelects() {
-        for (const [category, config] of Object.entries(categoriesConfig)) {
-            const select = document.getElementById(config.selectId);
-            while (select.options.length > 1) {
-                select.remove(1);
-            }
-
-            const categoryDishes = dishes.filter(d => d.category === category);
-            categoryDishes.forEach(dish => {
-                const option = new Option(dish.name, dish.keyword);
-                select.add(option);
-            });
-        }
-    }
-
-    // Обновление значений в селектах на основе selectedDishes
-    function updateOrderForm() {
-        for (const [category, config] of Object.entries(categoriesConfig)) {
-            const select = document.getElementById(config.selectId);
-            select.value = selectedDishes[category] ? selectedDishes[category].keyword : "";
-        }
-    }
-
-    // Расчет стоимости
-    function calculateAndDisplayTotal() {
-        let totalCost = 0;
-        const totalCostContainer = document.getElementById('total-cost-container');
-        const totalCostValueEl = document.getElementById('total-cost-value');
-
-        for (const item of Object.values(selectedDishes)) {
-            if (item) {
-                totalCost += item.price;
+    // Считаем стоимость
+    for (const [cat, id] of Object.entries(selectedDishes)) {
+        if (id) {
+            const dish = dishes.find(d => d.id === id);
+            if (dish) {
+                totalCost += dish.price;
+                currentDishes[cat] = dish;
+                count++;
             }
         }
+    }
 
-        if (totalCost > 0) {
-            totalCostValueEl.textContent = `${totalCost}Р`;
-            totalCostContainer.style.display = 'flex';
+    // Показываем или скрываем бар
+    if (count === 0) {
+        if(bar) bar.style.display = 'none';
+        return;
+    }
+    if(bar) {
+        bar.style.display = 'flex';
+        totalEl.textContent = `${totalCost}Р`;
+    }
+
+    // Проверка комбо (для активации кнопки)
+    const hasDrink = !!currentDishes.drink;
+    const hasMain = !!currentDishes.main;
+    const hasSoup = !!currentDishes.soup;
+    const hasSalad = !!currentDishes.salad;
+
+    let isValid = false;
+    if (hasDrink) {
+        if (hasMain) isValid = true;
+        else if (hasSoup && hasSalad) isValid = true;
+    }
+
+    if (linkBtn) {
+        if (isValid) {
+            linkBtn.classList.remove('btn-disabled');
+            linkBtn.removeAttribute('title');
         } else {
-            totalCostContainer.style.display = 'none';
+            linkBtn.classList.add('btn-disabled');
+            linkBtn.setAttribute('title', 'Соберите комбо: Напиток + (Главное ИЛИ Суп+Салат)');
         }
     }
+}
 
-    // Функция для уведомлений
-    // Создает динамическое модальное окно с сообщением
-    function showNotification(message) {
-        // Создаем оверлей
-        const overlay = document.createElement('div');
-        overlay.className = 'modal-overlay';
+async function loadDishes() {
+    try {
+        const response = await fetch(`${API_URL}?api_key=${API_KEY}`);
+        if (!response.ok) throw new Error('Failed to fetch');
+        
+        dishes = await response.json();
+        dishes.sort((a, b) => a.name.localeCompare(b.name));
 
-        // Создаем контейнер сообщения
-        const container = document.createElement('div');
-        container.className = 'modal-container';
-
-        // Текст
-        const text = document.createElement('p');
-        text.className = 'modal-text';
-        text.textContent = message;
-
-        // Кнопка
-        const btn = document.createElement('button');
-        btn.className = 'modal-btn';
-        btn.textContent = 'Окей \uD83D\uDC4C'; // Добавляем эмодзи
-
-        // Добавление обработчика закрытия
-        btn.addEventListener('click', () => {
-            document.body.removeChild(overlay);
-        });
-
-        // Сборка
-        container.appendChild(text);
-        container.appendChild(btn);
-        overlay.appendChild(container);
-
-        // Добавление на страницу
-        document.body.appendChild(overlay);
+        // Рендерим все категории
+        Object.keys(categoriesConfig).forEach(cat => renderCategory(cat));
+        
+        // Обновляем итоговую стоимость и панель
+        calculateAndDisplayTotal();
+        
+    } catch (error) {
+        console.error("Error loading dishes:", error);
     }
+}
 
-    // Обработчик событий
+// --- Обработчики событий ---
 
-    // 1. Инициализация при загрузке
-    Object.keys(categoriesConfig).forEach(cat => renderCategory(cat));
-    initFormSelects();
+document.addEventListener('DOMContentLoaded', () => {
+    loadFromLocalStorage(); // Сначала загружаем выбор пользователя
+    loadDishes();           // Потом загружаем блюда
 
     // 2. Логика фильтрации
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -179,83 +176,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Добавление блюда в заказ
+    // 3. Добавление блюда в заказ (Клик по карточке)
     const mainContent = document.querySelector('.main .container');
+    
     mainContent.addEventListener('click', (event) => {
+        // Ищем карточку, даже если кликнули на картинку или текст
         const card = event.target.closest('.dish-card');
         if (!card) return;
 
-        const dishKeyword = card.dataset.dish;
-        const dish = dishes.find(d => d.keyword === dishKeyword);
+        const dishId = parseInt(card.dataset.dishId);
+        
+        // Определяем категорию по родительской секции
+        const section = card.closest('.menu-section');
+        const categoryKey = section.dataset.category;
 
-        if (dish) {
-            selectedDishes[dish.category] = dish;
-            updateOrderForm();
-            calculateAndDisplayTotal();
-        }
-    });
+        // Сохраняем выбор
+        selectedDishes[categoryKey] = dishId;
+        
+        // Сохраняем в localStorage
+        saveToLocalStorage();
 
-    // 4. Ручное изменение селектов
-    const selects = document.querySelectorAll('.order-form select');
-    selects.forEach(select => {
-        select.addEventListener('change', () => {
-            const selectedKeyword = select.value;
-            let categoryName = select.name;
-            if (categoryName === 'main-dish') categoryName = 'main';
-            
-            const dish = selectedKeyword ? dishes.find(d => d.keyword === selectedKeyword) : null;
-            selectedDishes[categoryName] = dish;
-            calculateAndDisplayTotal();
-        });
-    });
-    
-    // 5. Кнопка сброса
-    const resetBtn = document.querySelector('.btn-reset');
-    if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-            selectedDishes = { soup: null, main: null, salad: null, drink: null, dessert: null };
-            document.getElementById('total-cost-container').style.display = 'none';
-        });
-    }
+        // Визуальное обновление
+        // 1. Убираем класс active-card у всех карточек В ЭТОЙ КАТЕГОРИИ
+        section.querySelectorAll('.dish-card').forEach(c => c.classList.remove('active-card'));
+        // 2. Добавляем класс нажатой карточке
+        card.classList.add('active-card');
 
-    // 6. Валидация формы
-    const orderForm = document.getElementById('order-form');
-    orderForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Останавливаем отправку по умолчанию
-
-        const { soup, main, salad, drink, dessert } = selectedDishes;
-
-        // Проверка: ничего не выбрано
-        if (!soup && !main && !salad && !drink && !dessert) {
-            showNotification('Ничего не выбрано. Выберите блюда для заказа');
-            return;
-        }
-
-        // Проверка: выбраны только напиток или десерт (отсутствует еда)
-        if (!soup && !main && !salad && (drink || dessert)) {
-            showNotification('Выберите главное блюдо');
-            return;
-        }
-
-        // Проверка: есть суп, но нет главного/салата
-        if (soup && !main && !salad) {
-            showNotification('Выберите главное блюдо/салат/стартер');
-            return;
-        }
-
-        // Проверка: есть салат, но нет супа/главного
-        if (salad && !soup && !main) {
-            showNotification('Выберите суп или главное блюдо');
-            return;
-        }
-
-        // Проверка: есть еда (любая комбинация), но нет напитка
-        if ((soup || main || salad) && !drink) {
-            showNotification('Выберите напиток');
-            return;
-        }
-
-        // Если все проверки пройдены, то отправляем форму
-        orderForm.submit(); 
+        // Пересчитываем итог
+        calculateAndDisplayTotal();
     });
 });

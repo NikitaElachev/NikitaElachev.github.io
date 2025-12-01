@@ -131,6 +131,101 @@ main {
     color: tomato;
 }
 
+/* Контейнер для sticky бара, чтобы он был прижат к низу экрана */
+.order-bar-wrapper {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    pointer-events: none; /* Пропускаем клики сквозь обертку */
+}
+
+/* Сам бар */
+.order-bar {
+    display: none; /* Скрыт по умолчанию */
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 30px;
+    border-radius: 20px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    pointer-events: auto; /* Включаем клики для бара */
+}
+
+.order-bar-info {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+}
+
+.order-bar .btn {
+    max-width: 250px;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Ссылка недоступна (серая) */
+.btn-disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Стили для страницы Order.html */
+
+/* Кнопка удаления в карточке */
+.delete-button {
+    background-color: tomato;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-top: auto;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #e05a4f;
+}
+
+/* Список в форме (левая колонка на странице заказа) */
+.order-summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.order-summary-item span:first-child {
+    font-weight: 600;
+    color: #555;
+}
+
+.order-summary-item span:last-child {
+    font-weight: 700;
+    color: #000;
+    max-width: 60%;
+    text-align: right;
+}
+
+/* Класс для активной (выбранной) карточки */
+.dish-card.active-card {
+    border: 2px solid tomato;
+}
+
+/* Указываем, что карточка кликабельна */
+.dish-card {
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
 /* Адаптивность */
 
 /* ширина экрана до 800px */
