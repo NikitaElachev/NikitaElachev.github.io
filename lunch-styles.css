@@ -210,14 +210,12 @@
     color: white;
 }
 
-/* Класс для выбранного блюда */
 .dish-card.active-card {
     border: 2px solid tomato;
 }
 
-/* Убедимся, что кнопка внутри карточки тоже реагирует, если нужно */
 .dish-card {
-    cursor: pointer; /* Курсор указывает, что кликабельна вся карточка */
+    cursor: pointer;
 }
 
 

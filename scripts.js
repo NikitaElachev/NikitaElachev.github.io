@@ -11,7 +11,7 @@ const categoriesConfig = {
     dessert: { gridId: 'desserts-grid', apiCategory: 'dessert' }
 };
 
-// Храним ID выбранных блюд (аналог того, что было раньше, но теперь храним ID)
+// Храним ID выбранных блюд
 let selectedDishes = {
     soup: null,
     main: null,
@@ -20,7 +20,7 @@ let selectedDishes = {
     dessert: null
 };
 
-// --- Вспомогательные функции для LocalStorage ---
+// Вспомогательные функции для LocalStorage
 function loadFromLocalStorage() {
     const saved = localStorage.getItem('selectedDishes');
     if (saved) {
@@ -32,7 +32,7 @@ function saveToLocalStorage() {
     localStorage.setItem('selectedDishes', JSON.stringify(selectedDishes));
 }
 
-// --- Основные функции (Названия сохранены) ---
+// Основные функции
 
 function createDishCard(dish) {
     const card = document.createElement('div');
@@ -75,8 +75,7 @@ function renderCategory(category, filterKind = null) {
     });
 }
 
-// Эта функция теперь обновляет нижнюю панель (Order Bar), 
-// так как формы на странице ланча больше нет.
+//Изменили функцию, чтобы она скрывала или показывала кнопку оформления заказа и подсчитывала стоимость
 function calculateAndDisplayTotal() {
     const bar = document.getElementById('order-bar');
     const totalEl = document.getElementById('order-total-price');
@@ -126,7 +125,7 @@ function calculateAndDisplayTotal() {
             linkBtn.removeAttribute('title');
         } else {
             linkBtn.classList.add('btn-disabled');
-            linkBtn.setAttribute('title', 'Соберите комбо: Напиток + (Главное ИЛИ Суп+Салат)');
+            linkBtn.setAttribute('title', 'Соберите комбо');
         }
     }
 }

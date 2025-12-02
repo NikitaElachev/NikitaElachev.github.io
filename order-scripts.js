@@ -11,7 +11,7 @@ let selectedDishIds = {
     dessert: null
 };
 
-// --- Вспомогательные функции ---
+// Вспомогательные функции
 
 function loadCart() {
     const saved = localStorage.getItem('selectedDishes');
@@ -22,7 +22,7 @@ function saveCart() {
     localStorage.setItem('selectedDishes', JSON.stringify(selectedDishIds));
 }
 
-// Функция для красивых уведомлений (как в ЛР 7)
+// Функция для красивых уведомлений
 function showNotification(message) {
     // Создаем оверлей
     const overlay = document.createElement('div');
@@ -56,7 +56,7 @@ function showNotification(message) {
     document.body.appendChild(overlay);
 }
 
-// --- Основная логика ---
+// Основная логика
 
 function createOrderCard(dish, categoryKey) {
     const card = document.createElement('div');
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         showNotification('Ошибка загрузки данных меню. Попробуйте обновить страницу.');
     }
 
-    // Обработчик удаления (делегирование)
+    // Обработчик удаления
     const grid = document.getElementById('order-items-grid');
     if (grid) {
         grid.addEventListener('click', (e) => {
@@ -142,8 +142,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 selectedDishIds[cat] = null;
                 saveCart();
                 renderOrder();
-                // Здесь мы не показываем уведомление сразу, 
-                // пользователь увидит ошибку, когда нажмет "Отправить", если удалил что-то важное.
             }
         });
     }
@@ -156,13 +154,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Отправка формы с ВАЛИДАЦИЕЙ
+    // Отправка формы с валидацией
     const orderForm = document.getElementById('order-form');
     if (orderForm) {
         orderForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // --- ВАЛИДАЦИЯ (Как в ЛР 7) ---
+            // Валидация
             const { soup, main, salad, drink, dessert } = selectedDishIds;
 
             // 1. Ничего не выбрано
@@ -195,7 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            // --- Если проверки пройдены, отправляем ---
+            // Если проверки пройдены, отправляем
             
             const formData = new FormData(e.target);
             
