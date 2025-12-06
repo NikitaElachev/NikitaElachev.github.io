@@ -75,7 +75,6 @@ function renderCategory(category, filterKind = null) {
     });
 }
 
-//Изменили функцию, чтобы она скрывала или показывала кнопку оформления заказа и подсчитывала стоимость
 function calculateAndDisplayTotal() {
     const bar = document.getElementById('order-bar');
     const totalEl = document.getElementById('order-total-price');
@@ -149,11 +148,11 @@ async function loadDishes() {
     }
 }
 
-// --- Обработчики событий ---
+// Обработчики событий
 
 document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage(); // Сначала загружаем выбор пользователя
-    loadDishes();           // Потом загружаем блюда
+    loadDishes(); // Потом загружаем блюда
 
     // 2. Логика фильтрации
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -196,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveToLocalStorage();
 
         // Визуальное обновление
-        // 1. Убираем класс active-card у всех карточек В ЭТОЙ КАТЕГОРИИ
+        // 1. Убираем класс active-card у всех карточек в этой категории
         section.querySelectorAll('.dish-card').forEach(c => c.classList.remove('active-card'));
         // 2. Добавляем класс нажатой карточке
         card.classList.add('active-card');

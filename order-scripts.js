@@ -78,7 +78,7 @@ function renderOrder() {
     const grid = document.getElementById('order-items-grid');
     const emptyMsg = document.getElementById('empty-cart-message');
     
-    if (!grid) return; // Защита, если скрипт запущен не на той странице
+    if (!grid) return;
 
     grid.innerHTML = '';
     
