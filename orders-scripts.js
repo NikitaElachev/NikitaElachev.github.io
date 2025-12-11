@@ -6,14 +6,14 @@ let orders = [];
 let dishes = [];
 let currentOrderId = null; // ID заказа, с которым сейчас работаем (удаление/редактирование)
 
-// --- Утилиты ---
+// Утилиты
 
 // Показ уведомления (копия из order-scripts.js)
 function showNotification(message, type = 'success') {
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
     
-    // Стилизуем оверлей JS-ом или используем класс из CSS
+    // Стилизуем оверлей JS
     overlay.style.position = 'fixed';
     overlay.style.top = '0';
     overlay.style.left = '0';
@@ -81,7 +81,7 @@ function getOrderDetails(order) {
     };
 }
 
-// --- Работа с API ---
+// Работа с API
 
 async function fetchDishes() {
     try {
@@ -141,7 +141,7 @@ async function updateOrder(id, formData) {
     }
 }
 
-// --- Рендеринг ---
+// Рендеринг
 
 function renderTable() {
     const tbody = document.getElementById('orders-tbody');
@@ -181,7 +181,7 @@ function renderTable() {
     });
 }
 
-// --- Модальные окна ---
+// Модальные окна
 
 function openModal(modalId) {
     document.getElementById(modalId).classList.add('show');

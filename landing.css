@@ -24,7 +24,7 @@ body {
 /* Hero Section */
 .hero-section {
     min-height: 100vh;
-    padding-top: 80px; /* Отступ для фиксированного меню */
+    padding-top: 80px;
     background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
 }
 
@@ -65,11 +65,6 @@ body {
     background-color: #e05a4f;
     border-color: #e05a4f;
     color: white;
-}
-
-/* Стили для CTA секции */
-.cta-section {
-    background-image: url('images/bg-pattern.png'); /* Если есть паттерн, иначе просто цвет */
 }
 
 /* Анимация при наведении на карточки */
