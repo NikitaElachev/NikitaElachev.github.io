@@ -10,42 +10,33 @@ let currentOrderId = null; // ID заказа, с которым сейчас р
 
 // Показ уведомления (копия из order-scripts.js)
 function showNotification(message, type = 'success') {
+    // Создаем оверлей
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
     
-    // Стилизуем оверлей JS
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-    overlay.style.display = 'flex';
-    overlay.style.zIndex = '2000';
-    overlay.style.justifyContent = 'center';
-    overlay.style.alignItems = 'center';
-
+    // Создаем контейнер
     const container = document.createElement('div');
     container.className = 'modal-container';
-    container.style.backgroundColor = 'white';
-    container.style.padding = '30px';
-    container.style.borderRadius = '20px';
-    container.style.textAlign = 'center';
 
+    // Создаем текст
     const text = document.createElement('p');
     text.className = 'modal-text';
     text.textContent = message;
-    text.style.fontSize = '18px';
-    text.style.marginBottom = '20px';
 
+    // Создаем кнопку
     const btn = document.createElement('button');
     btn.className = 'btn btn-secondary';
     btn.textContent = 'OK';
+    
+    // Логика закрытия
     btn.onclick = () => document.body.removeChild(overlay);
 
+    // Сборка элементов
     container.appendChild(text);
     container.appendChild(btn);
     overlay.appendChild(container);
+    
+    // Добавление на страницу
     document.body.appendChild(overlay);
 }
 
@@ -249,7 +240,7 @@ window.openEditModal = function(id) {
     openModal('edit-modal');
 }
 
-// --- Обработчики событий ---
+// Обработчики событий
 
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchDishes(); // Сначала блюда, чтобы знать названия и цены

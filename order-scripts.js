@@ -22,7 +22,7 @@ function saveCart() {
     localStorage.setItem('selectedDishes', JSON.stringify(selectedDishIds));
 }
 
-// Функция для красивых уведомлений
+// Функция для красивых уведомлений (как в других скриптах)
 function showNotification(message) {
     // Создаем оверлей
     const overlay = document.createElement('div');
